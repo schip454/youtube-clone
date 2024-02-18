@@ -13,7 +13,11 @@ const CommentItem: FC<ICommentItemProps> = ({ comment }) => {
     <div className="flex text-white text-xs gap-4 overflow-x-hidden">
       <div className="flex h-11 w-11 rounded-full ">
         <img
-          src={comment?.authorThumbnail[2]?.url}
+          src={
+            comment?.authorThumbnail[2]
+              ? comment?.authorThumbnail[2]?.url
+              : comment?.authorThumbnail[1]?.url
+          }
           alt={comment?.authorText ? comment?.authorText : 'Avatar'}
           className="h-full w-full object-cover "
         />

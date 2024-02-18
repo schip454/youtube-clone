@@ -11,6 +11,7 @@ import CommentSkeleton from '../Skeletons/CommentSkeleton';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import CommentFilter from './CommentFilter';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import ErrorPopup from '../ErrorPopup/ErrorPopup';
 
 export interface ICommentsProps {
   videoId: string;
@@ -41,14 +42,13 @@ const Comments: FC<ICommentsProps> = ({ videoId }) => {
       dispatch(getCommentsContinuation(params));
     }, 2000);
   };
-
   return (
     <>
       <div className="text-white px-2 pb-1 flex gap-5 items-center mb-8 border-b-[1px] border-white/[0.15]">
         <h2 className="font-bold text-xl">{commentsTotal} comments</h2>
         <CommentFilter videoId={videoId} />
       </div>
-      {!isCommentsLoading ? (
+      {!isCommentsLoading && commentsItems.length > 0 ? (
         <InfiniteScroll
           className="flex flex-col gap-4"
           dataLength={commentsItems.length}
@@ -64,9 +64,13 @@ const Comments: FC<ICommentsProps> = ({ videoId }) => {
               <b>Yay! You have seen it all</b>
             </p>
           }>
-          {commentsItems?.map((item) => (
-            <CommentItem key={item.commentId} comment={item} />
-          ))}
+          {commentsItems?.[0]?.commentId !== null ? (
+            commentsItems?.map((item) => (
+              <CommentItem key={item.commentId} comment={item} />
+            ))
+          ) : (
+            <ErrorPopup text={'Comments not found'} />
+          )}
         </InfiniteScroll>
       ) : (
         [...new Array(3)].map((_, i) => (
