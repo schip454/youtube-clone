@@ -5,6 +5,7 @@ import Header from './components/Header/Header';
 import Feed from './components/Feed/Feed';
 import VideoDetails from './components/Video/VideoDetails';
 import SearchResult from './components/Search/SearchResult';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const App: FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: FC = () => {
           <Route path="/searchResult/:searchQuery" element={<SearchResult />} />
           <Route path="/video/:id" element={<VideoDetails />} />
         </Routes>
+        <SpeedInsights />
       </div>
     </BrowserRouter>
   );
