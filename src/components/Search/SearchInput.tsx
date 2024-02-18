@@ -1,4 +1,4 @@
-import { FC, KeyboardEvent, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
@@ -29,7 +29,7 @@ const SearchInput: FC = () => {
     setTipsOpen(false);
   };
 
-  const searchQueryHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+  const searchQueryHandler = (e: any) => {
     if (
       (e?.key === 'Enter' || e === 'searchButton') &&
       searchQuery?.length > 0
@@ -38,7 +38,7 @@ const SearchInput: FC = () => {
     }
   };
 
-  const handleClick = (e: MouseEvent) => {
+  const handleClick = (e: any) => {
     if (tipRef.current && !tipRef.current.contains(e.target))
       setTipsOpen(false);
   };
