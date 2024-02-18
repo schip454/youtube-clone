@@ -16,7 +16,7 @@ const SearchInput: FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isTipsOpen, setTipsOpen] = useState(false);
 
-  const tipRef = useRef(null);
+  const tipRef = useRef<null | HTMLDivElement>(null);
   const searchInputRef = useRef(null);
 
   const { searchHistory, currentSearchList } = useAppSelector(
